@@ -195,10 +195,10 @@ latent size) is an additional robustness analysis; its results are not part of t
 
 ## Numerical reproducibility
 
-- Cached results were produced with a development build of DRIADA that predates 1.2.2.
-  The autoencoder, KSG and Gaussian-copula code used here is unchanged in 1.2.2; one
-  quantity, the head-direction component of the hippocampal per-component analysis, comes
-  out slightly different under 1.2.2 (for example 0.066 instead of 0.061 bits in one session).
+- Cached results were produced with an earlier development build of DRIADA.
+  Every per-session quantity that was recomputed under 1.2.2 matched the cache except one:
+  the head-direction component of the hippocampal per-component analysis, comes
+  out slightly different under 1.2.2 (for example 0.067 instead of 0.061 bits in one session).
 - Autoencoder training on GPU and CPU is not bit-identical, and the SNN autoencoders were
   trained without a fixed seed, so a rerun from raw data reproduces the cached values up to
   training noise.
