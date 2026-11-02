@@ -1,0 +1,13 @@
+check: rel_corr vs relevance axis I_zy_bin_corr Spearman 1.000, mean |diff| 0.000
+=== 61 sessions (61) ===
+I(X;Y) decoder mean 2.755; rel_corr mean 0.650; CMI_corr mean 0.239 median 0.224; CMI>0 in 59/61; ratio CMI/rel (means) 0.37
+by day CMI: {1: 0.198, 2: 0.263, 3: 0.195, 4: 0.304} rel: {1: 0.536, 2: 0.597, 3: 0.698, 4: 0.79}
+slope cmi_corr: median +0.031, up 11/16, p_one(greater) 0.072, p_two 0.144
+slope rel_corr: median +0.109, up 11/16, p_one(greater) 0.037, p_two 0.074
+slope I_x_y: median -0.209, up 4/16, p_one(greater) 0.997, p_two 0.006
+=== 64 sessions (64) ===
+I(X;Y) decoder mean 2.628; rel_corr mean 0.620; CMI_corr mean 0.228 median 0.210; CMI>0 in 60/64; ratio CMI/rel (means) 0.37
+by day CMI: {1: 0.198, 2: 0.263, 3: 0.183, 4: 0.268} rel: {1: 0.536, 2: 0.597, 3: 0.655, 4: 0.692}
+slope cmi_corr: median +0.023, up 10/16, p_one(greater) 0.149, p_two 0.298
+slope rel_corr: median +0.087, up 10/16, p_one(greater) 0.096, p_two 0.193
+slope I_x_y: median -0.294, up 4/16, p_one(greater) 0.998, p_two 0.005

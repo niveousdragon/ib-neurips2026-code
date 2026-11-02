@@ -1,0 +1,38 @@
+# Hippocampus pipeline settings (miniscope CA1, 16 mice x 4 days, open-field exploration).
+# Paths are not set here: raw data is read from ib.paths.data_dir("hippocampus")
+# (IB_DATA_HIPPOCAMPUS), results go to ib.paths.results_dir("hippocampus").
+
+data:
+  # Layout under the raw-data folder (see hippocampus/README section of the notes):
+  #   <sessions_subdir>/<session_file>   one synchronized session (calcium + tracking)
+  #   <matching_subdir>/<matching_file>  cross-day neuron matching table of one mouse
+  sessions_subdir: sessions
+  matching_subdir: matching
+  session_file: "NOF_{mouse}_{day}D syn data.npz"
+  matching_file: "NOF_{mouse}.csv"
+
+sampling_rate_hz: 20.0
+days: [1, 2, 3, 4]
+
+# Frames: every valid frame (finite egocentric state and position), then every
+# downsample-th of them (20 Hz -> 4 Hz), so adjacent samples are not tied by the
+# calcium decay; first train_frac of the session trains, the rest is the test fold.
+downsample: 5
+train_frac: 0.7
+
+# Probe autoencoder (Supplementary "Autoencoder hyperparameters").
+latent_dim: 16
+hidden_dim: 64
+predict_hidden: 32   # 0 = linear position head, >0 = one-hidden-layer MLP head
+ae_epochs: 100
+batch_size: 64
+lr: 0.001
+seed: 42
+
+# Roll-shuffle controls: n_shuffles autoencoders retrained on per-neuron
+# circularly shifted calcium, shuffle k uses seed + 1000 * (k + 1).
+n_shuffles: 5
+
+# Leading principal components of the z-scored activity saved per session
+# (used by the alternative-probe analysis).
+pca_dim: 30

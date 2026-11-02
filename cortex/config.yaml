@@ -1,0 +1,37 @@
+# Goltstein et al. 2021: visual category learning across mouse visual areas.
+# Two-photon calcium imaging, layer 2/3, binary category of drifting gratings.
+# Data and result folders come from ib.paths (IB_DATA_CORTEX, IB_RESULTS).
+
+n_classes: 2
+
+# Peri-stimulus extraction at ~15 Hz: 15 frames before and 30 after onset.
+# The loader uses these same values as its defaults.
+pre_frames: 15
+post_frames: 30
+
+# Named windows in frames relative to stimulus onset (inclusive); 1 frame ~ 66 ms.
+# The paper uses post_stim only.
+windows:
+  pre_stim:    [-15, -1]    # ~1 s baseline
+  early_stim:  [0, 10]      # onset response, 0 to ~0.7 s
+  late_stim:   [11, 22]     # sustained, ~0.7 s to ~1.5 s
+  post_stim:   [0, 22]      # full stimulus period, 0 to ~1.5 s
+  full:        [-15, 29]    # whole extracted window
+
+# Session filters
+min_trials: 20
+min_neurons: 50
+
+# Single-split fallback when --folds 1 is requested (the paper uses 5 folds)
+test_fraction: 0.3
+
+# Classification autoencoder (probe Z, d_Z = 8)
+ae:
+  latent_dim: 8
+  hidden_dim: 128
+  ae_epochs: 80
+  lr: 0.001
+  batch_size: 32
+  class_weight: 1.0
+  class_hidden: 32
+  seed: 42

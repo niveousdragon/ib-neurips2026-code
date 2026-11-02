@@ -1,0 +1,8 @@
+drop3 MLP   : rising 11/16, one-sided Wilcoxon p=0.0370
+drop3 logreg: rising 11/16, one-sided Wilcoxon p=0.0370
+drop3 per-mouse Pearson r(MLP slope, logreg slope) = 0.828 (p=0.0001, n=16)
+drop3 mean raw MI: MLP 2.240, logreg 1.908; shuffle: MLP 1.610, logreg 1.258
+all64 MLP   : rising 10/16, one-sided Wilcoxon p=0.0719
+all64 logreg: rising 10/16, one-sided Wilcoxon p=0.0964
+all64 per-mouse Pearson r(MLP slope, logreg slope) = 0.766 (p=0.0005, n=16)
+all64 mean raw MI: MLP 2.137, logreg 1.820; shuffle: MLP 1.535, logreg 1.200

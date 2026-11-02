@@ -1,0 +1,14 @@
+[64 sessions] Ridge test R^2 per target
+          count  median   mean
+var                           
+speed        64  -1.965 -5.289
+ang_vel      64  -1.732 -6.696
+head_dir     64  -1.874 -2.683
+d_obj1       64   0.155 -7.608
+[61 sessions] Ridge test R^2 per target
+          count  median   mean
+var                           
+speed        61  -1.895 -4.069
+ang_vel      61  -1.543 -5.412
+head_dir     61  -1.783 -2.473
+d_obj1       61   0.174 -0.040

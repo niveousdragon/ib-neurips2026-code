@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Analysis code for: Information bottleneck dynamics during learning across artificial and biological neural systems"
+type: software
+license: MIT
+authors:
+  - given-names: Nikita
+    family-names: Pospelov
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Olga
+    family-names: Ivashkina
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Viktor
+    family-names: Plusnin
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Olga
+    family-names: Rogozhnikova
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Anna
+    family-names: Ivanova
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Ksenia
+    family-names: Toropova
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+  - given-names: Konstantin
+    family-names: Anokhin
+    affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
+preferred-citation:
+  type: conference-paper
+  title: "Information bottleneck dynamics during learning across artificial and biological neural systems"
+  collection-title: "Advances in Neural Information Processing Systems"
+  conference:
+    name: "NeurIPS 2026"
+  year: 2026
+  authors:
+    - given-names: Nikita
+      family-names: Pospelov
+    - given-names: Olga
+      family-names: Ivashkina
+    - given-names: Viktor
+      family-names: Plusnin
+    - given-names: Olga
+      family-names: Rogozhnikova
+    - given-names: Anna
+      family-names: Ivanova
+    - given-names: Ksenia
+      family-names: Toropova
+    - given-names: Konstantin
+      family-names: Anokhin

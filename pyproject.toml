@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ib-neurips2026"
+version = "1.0.0"
+description = "Analysis code for 'Information bottleneck dynamics during learning across artificial and biological neural systems' (NeurIPS 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+# Exact versions used for the release check live in requirements.txt.
+dependencies = [
+    "driada==1.2.2",
+    "numpy>=2.0",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "matplotlib>=3.7",
+    "scikit-learn>=1.3",
+    "statsmodels>=0.14",
+    "torch>=2.0",
+    "h5py>=3.9",
+    "pyyaml>=6.0",
+    "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501", "E402", "E731", "E741"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ib"]

@@ -1,0 +1,15 @@
+matched neurons constant across days within each mouse: True
+matched neurons per mouse (16): mean 200.3, median 157.5, range 29-435
+occupied 10x10 bins in the test fold, drop3 (n, mean, median per day):
+  day 1: n=16  mean 73.7  median 74
+  day 2: n=16  mean 64.2  median 68
+  day 3: n=15  mean 63.1  median 66
+  day 4: n=14  mean 58.3  median 59
+lowest distance travelled (64 sessions):
+  H32 day 4: distance 11.84, percentile 1.6%, X_ego effective dim 2  [excluded]
+  H06 day 4: distance 13.85, percentile 3.1%, X_ego effective dim 3  [excluded]
+  H33 day 3: distance 17.29, percentile 4.7%, X_ego effective dim 3  [excluded]
+  H06 day 3: distance 18.44, percentile 6.2%, X_ego effective dim 5  [kept]
+  H39 day 4: distance 18.63, percentile 7.8%, X_ego effective dim 3  [kept]
+  H36 day 3: distance 30.95, percentile 9.4%, X_ego effective dim 6  [kept]
+sessions with X_ego effective dim <= 3: H32 day 4 (2), H06 day 4 (3), H33 day 3 (3), H39 day 4 (3)
