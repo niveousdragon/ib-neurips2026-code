@@ -73,10 +73,10 @@ def main():
         else:
             r = float("nan")
 
-        ax.set_title(f"{SHORT[layer]}, $e = {EPOCH}$  ($r = {r:+.2f}$, $n = {len(sub)}$)",
+        ax.set_title(f"{SHORT[layer]}, epoch {EPOCH}  ($r = {r:+.2f}$, $n = {len(sub)}$)",
                      fontsize=12)
         ax.set_xlabel(r"$\rho_n$ (MEI relative perplexity)", fontsize=11)
-        ax.set_ylabel(r"$I(t_n; Y)$ (bits)", fontsize=11)
+        ax.set_ylabel(r"$I(s_n; Y)$ (bits)", fontsize=11)
         ax.tick_params(labelsize=9)
         ax.grid(alpha=0.25, lw=0.5)
 

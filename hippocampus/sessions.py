@@ -3,12 +3,13 @@
 16 mice x 4 days = 64 recorded sessions. The paper analyses 61 of them.
 
 Excluded sessions (Supplementary "Session exclusion"): three sessions showed
-near-immobility throughout the recording (severe freezing), identified by a
-collapse of the egocentric feature vector to effective dimensionality <= 3;
-their distance travelled is in the lowest 5 % of the cohort (11.84, 13.85 and
-17.29 m). Effective dimensionality here is the number of non-constant
-components of X_ego over the session (see 10_session_summary.py); an object
-distance is constant when the animal never entered that object's zone.
+near-immobility throughout the recording (severe freezing): the three highest
+fractions of rest or freezing (87-96 %, next highest 78 %) and the three lowest
+distances travelled of the 64 sessions (11.84, 13.85 and 17.29 arena lengths).
+Effective dimensionality, the number of non-constant components of X_ego over the
+session (see 10_session_summary.py), does not define the cut: H39 day 4 also has 3
+and is kept. An object distance is constant when the animal never entered that
+object's zone.
 All 16 mice keep at least three days.
 """
 import pandas as pd

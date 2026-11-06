@@ -133,7 +133,7 @@ def panel_trajectories(ax, traj: pd.DataFrame):
 
     ax.axhline(0, c="0.5", lw=0.6, ls=":")
     ax.axvline(0, c="0.5", lw=0.6, ls=":")
-    ax.set_xlabel(r"$R^{2}(Z \to X_{\mathrm{phys}})$, bias-corrected", fontsize=LABEL_FS)
+    ax.set_xlabel(r"$R^{2}(Z \to X_{\mathrm{phys}})$", fontsize=LABEL_FS)
     ax.set_ylabel(r"$I(Z;Y)$, bias-corrected (bits)", fontsize=LABEL_FS)
     ax.tick_params(labelsize=TICK_FS)
     legend_handles = [
@@ -144,10 +144,10 @@ def panel_trajectories(ax, traj: pd.DataFrame):
         plt.Line2D([0], [0], color=COL_C1, lw=1.4, marker=">", ms=7,
                    markerfacecolor=COL_C1, markeredgecolor=COL_C1, linestyle="-", alpha=0.55),
     ]
-    ax.legend(legend_handles, ["V1", "cluster 2 ex-V1", "cluster 1"],
+    ax.legend(legend_handles, ["V1", "semantic ex-V1", "feature"],
               loc="lower right", frameon=False, fontsize=LEGEND_FS,
               handlelength=1.8, borderpad=0.4, labelspacing=0.4)
-    ax.set_title(r"Per-(mouse, area) IB trajectory: naive $\to$ trained",
+    ax.set_title(r"Per-(mouse, area) information plane: naive $\to$ trained",
                  fontsize=TITLE_FS, loc="left")
     ax.grid(alpha=0.22, lw=0.5)
 
@@ -158,7 +158,7 @@ def panel_decoder_vs_behaviour(ax, decoder_df: pd.DataFrame):
     ax.axhline(0.5, c="0.7", lw=0.6, ls=":", zorder=0)
     ax.axvline(0.5, c="0.7", lw=0.6, ls=":", zorder=0)
 
-    for areas, label in ((CLUSTER1, "cluster 1"), (CLUSTER2 - {"V1"}, "cluster 2 ex-V1"),
+    for areas, label in ((CLUSTER1, "feature"), (CLUSTER2 - {"V1"}, "semantic ex-V1"),
                          ({"V1"}, "V1")):
         sub = decoder_df[decoder_df.area.isin(areas)]
         if sub.empty:
@@ -173,14 +173,14 @@ def panel_decoder_vs_behaviour(ax, decoder_df: pd.DataFrame):
     ax.text(0.04, 0.96, f"mean gap = +{gap:.1f} pp", transform=ax.transAxes,
             ha="left", va="top", fontsize=ANNOT_FS,
             bbox=dict(boxstyle="round,pad=0.35", fc="white", ec="0.5", lw=0.7))
-    ax.set_xlabel("behavioural accuracy (category stage)", fontsize=LABEL_FS)
+    ax.set_xlabel("behavioral accuracy (category stage)", fontsize=LABEL_FS)
     ax.set_ylabel("decoder accuracy from cortical $Z$\n(LogReg, category stage)",
                   fontsize=LABEL_FS)
     ax.tick_params(labelsize=TICK_FS)
     ax.set_xlim(0.42, 1.02)
     ax.set_ylim(0.42, 1.02)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_title("Decoder vs. behavioural accuracy", fontsize=TITLE_FS, loc="left")
+    ax.set_title("Decoder vs. behavioral accuracy", fontsize=TITLE_FS, loc="left")
     ax.legend(loc="lower right", frameon=False, fontsize=LEGEND_FS,
               handlelength=1.0, borderpad=0.4, labelspacing=0.3)
     ax.grid(alpha=0.22, lw=0.5)

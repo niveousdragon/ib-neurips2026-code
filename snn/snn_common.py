@@ -11,6 +11,15 @@ Raw data (not redistributed) lives under IB_DATA_SNN:
 
 Each activity file holds one array of shape (T=50 timesteps, n_images, N channels);
 the analysis uses the spike count per channel, i.e. the sum over timesteps.
+
+The public deposit holds that sum directly, losslessly, in place of SJ-SNN-50:
+
+    Activity/SJ-SNN-50-summed/iter <E>/<split>/SJ-SNN summed iter <E> <split> layer <L>.npz
+        counts (n_images, N) unsigned integers and denominator P: the sum is counts / P
+        (P is the number of spatial positions per channel; P = 1 for the L4 blocks).
+
+load_activity() reads whichever of the two layouts is present and returns the same
+float32 array from both.
 """
 import gc
 
@@ -48,6 +57,7 @@ SUBSAMPLE_SEED = 42
 # Relative locations under IB_DATA_SNN.
 ACTIVITY_SUBDIR = "Activity"
 SNN_SUBDIR = "SJ-SNN-50"
+SNN_SUMMED_SUBDIR = "SJ-SNN-50-summed"
 MEI_YAML = "SJ-SNN-T50/SJ-SNN evolution data full 3.yaml"
 TEST_ACC_NPZ = "SJ-SNN-T50/SJ-SNN T50 test acc.npz"
 CIFAR_SUBDIR = "cifar"
@@ -63,10 +73,10 @@ def snn_dir():
 
 def require_activity():
     """Stop with a clear message if the raw activity is not available."""
-    if not snn_dir().exists():
+    if not snn_dir().exists() and not (activity_root() / SNN_SUMMED_SUBDIR).exists():
         raise SystemExit(
             f"SNN activity not found at {snn_dir()}. Set IB_DATA_SNN to the folder "
-            f"that contains {ACTIVITY_SUBDIR}/{SNN_SUBDIR} (see snn_common.py for the layout)."
+            f"that contains {ACTIVITY_SUBDIR}/{SNN_SUBDIR} or {ACTIVITY_SUBDIR}/{SNN_SUMMED_SUBDIR} (see snn_common.py for the layout)."
         )
 
 
@@ -81,6 +91,11 @@ def load_labels(split="test"):
 
 def load_activity(epoch, layer, split="test"):
     """Spike counts (n_images, N) of one sublayer at one checkpoint, or None if absent."""
+    summed = (activity_root() / SNN_SUMMED_SUBDIR / f"iter {epoch}" / split
+              / f"SJ-SNN summed iter {epoch} {split} layer {layer}.npz")
+    if summed.exists():
+        data = np.load(summed)
+        return data["counts"].astype(np.float32) / np.float32(data["denominator"])
     suffix = ".npz" if split == "train" else ".npy.npz"
     path = snn_dir() / f"iter {epoch}" / split / f"SJ-SNN act iter {epoch} {split} layer {layer}{suffix}"
     if not path.exists():

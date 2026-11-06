@@ -1,6 +1,6 @@
 # Information-plane dynamics during learning: analysis code
 
-Code for the NeurIPS 2026 paper *Information bottleneck dynamics during learning
+Code for the NeurIPS 2026 paper *Information-plane dynamics during learning
 across artificial and biological neural systems* (Pospelov, Ivashkina, Plusnin,
 Rogozhnikova, Ivanova, Toropova, Anokhin).
 
@@ -79,17 +79,32 @@ export IB_DATA_CORTEX=$PWD/data/chronicrecordings
 ```
 
 **Hippocampus.** Our miniscope recordings of 16 mice over 4 days (64 sessions; 61 analysed).
-Data availability: TODO (DOI of the data deposit). Expected layout under `IB_DATA_HIPPOCAMPUS`:
+Sessions were recorded at 20 Hz (26 sessions) or 30 Hz (38 sessions); the analysis uses one
+nominal rate of 20 Hz for every session (`hippocampus/config.yaml`).
+Data: DANDI, <https://dandiarchive.org/dandiset/002047>. Expected layout under `IB_DATA_HIPPOCAMPUS`:
 
 ```
 sessions/NOF_<mouse>_<day>D syn data.npz    64 session files (calcium, position, behaviour)
 matching/NOF_<mouse>.csv                    16 cross-day cell-matching tables
 ```
 
-**Spiking network.** Spike-count activity of the trained network at 26 checkpoints on CIFAR-10
-(about 85 GB) and the per-neuron maximally exciting inputs. Availability: TODO (URL or DOI).
-Layout under `IB_DATA_SNN` is documented in `snn/snn_common.py`. The training of the network
-itself is not part of this repository.
+**Spiking network.** Activity of the trained network at 26 checkpoints on CIFAR-10, the
+per-neuron maximally exciting inputs and the learning curves: Zenodo,
+doi:[10.5281/zenodo.23962331](https://doi.org/10.5281/zenodo.23962331), CC BY 4.0. The deposit holds
+the activity summed over the 50 timesteps, losslessly, as integer `counts` with a denominator `P`:
+the analysed value is `counts / P`, where `P` is the number of spatial positions per channel
+(256 in sn1, 64 in stage 1, 16 in stage 2, 4 in stage 3, 1 in stage 4). Each timestep of the original
+recording stores the fraction of a channel's positions that spiked, so values are integers only in
+stage 4. `snn/snn_common.py` documents the layout and reads either form. One cell is missing:
+the activity of `layer1.0.sn1` at epoch 0 on the training images is an unreadable file in the
+original cache, so `results/snn/latent_mi.npz` holds NaN for that cell (441 of 442 computed), and
+`dimensionality.npz` holds `ed` = NaN for `sn1` at every epoch but 0 (417 of 442 finite; the
+paper does not use `ed`).
+
+The network was trained with `snn/SpikingJelly/sj_snn_train.py` of
+<https://github.com/iabs-neuro/mango>, commit `8b96b583616a660c11f9734cf15d20317ed252c7` (50
+timesteps, 1000 epochs, learning rate 0.2), the code of Pospelov et al. (2025, *Neurocomputing*).
+Autoencoder weights were never stored: the scripts retrain the autoencoders.
 
 Without the raw data, every number and figure of the paper can still be regenerated from
 `results/` (next section).
@@ -190,8 +205,10 @@ python snn/10_image_statistics_decoding.py
 python snn/11_image_statistics_bootstrap.py
 ```
 
-`hippocampus/extra_vae_dz_sweep.py` (variational-autoencoder probe and a sweep of the
-latent size) is an additional robustness analysis; its results are not part of the paper.
+`hippocampus/extra_vae_dz_sweep.py` (variational-autoencoder probe and a sweep of the latent size,
+Supplementary "Alternative probes") needs the raw sessions and several CPU-hours; its summary is
+`results/hippocampus/stats/vae_dz_summary.csv`. `hippocampus/stats_session_sensitivity.py` prints the
+extra session-exclusion numbers of the Supplementary (it needs the saved probe latents, `--probes-dir`, and the raw sessions).
 
 ## Numerical reproducibility
 
@@ -200,8 +217,9 @@ latent size) is an additional robustness analysis; its results are not part of t
   the head-direction component of the hippocampal per-component analysis, comes
   out slightly different under 1.2.2 (for example 0.067 instead of 0.061 bits in one session).
 - Autoencoder training on GPU and CPU is not bit-identical, and the SNN autoencoders were
-  trained without a fixed seed, so a rerun from raw data reproduces the cached values up to
-  training noise.
+  trained without a fixed seed (seed 42 fixes only the training subsample), so a rerun from raw data
+  reproduces the cached values up to training noise, about 1 part in 1000 for the effective
+  dimension and the SNN autoencoder (22.389, 22.382, 22.381 against 22.376 in the cache).
 - Figures rendered with a different FreeType build differ from the paper's PNGs in text
   anti-aliasing only.
 

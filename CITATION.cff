@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the paper below."
-title: "Analysis code for: Information bottleneck dynamics during learning across artificial and biological neural systems"
+title: "Analysis code for: Information-plane dynamics during learning across artificial and biological neural systems"
 type: software
 license: MIT
 authors:
@@ -27,7 +27,7 @@ authors:
     affiliation: "Institute for Advanced Brain Studies of the Moscow State University"
 preferred-citation:
   type: conference-paper
-  title: "Information bottleneck dynamics during learning across artificial and biological neural systems"
+  title: "Information-plane dynamics during learning across artificial and biological neural systems"
   collection-title: "Advances in Neural Information Processing Systems"
   conference:
     name: "NeurIPS 2026"

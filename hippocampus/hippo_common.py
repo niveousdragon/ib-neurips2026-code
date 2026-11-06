@@ -2,7 +2,7 @@
 
 Raw data (not redistributed) lives under ib.paths.data_dir("hippocampus"):
 
-    sessions/NOF_<mouse>_<day>D syn data.npz   one synchronized session, 20 Hz:
+    sessions/NOF_<mouse>_<day>D syn data.npz   one synchronized session, 20 or 30 Hz:
         calcium (n_neurons, n_frames), x, y (arena coordinates scaled to [0, 1]),
         speed, headdirection, object1..object4 (zone masks), objects, rest,
         freezing, locomotion, rear, ...

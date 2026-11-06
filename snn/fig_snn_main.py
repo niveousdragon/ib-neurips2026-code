@@ -338,8 +338,8 @@ def fig_neuron_mei(out_name="fig2_snn_neuron_mei.png"):
     # ---- Left: bars + I(Z;Y) line, 2 axes ----
     axA.bar(x, summary.mean_mi.values, yerr=summary.ci95.values,
             color="0.7", alpha=0.85, edgecolor="k", capsize=3,
-            label=r"per-neuron $I(t_n; Y)$, mean $\pm$ 95% CI")
-    axA.set_ylabel(r"per-neuron $I(t_n; Y)$, bits", fontsize=F_LABEL)
+            label=r"per-neuron $I(s_n; Y)$, mean $\pm$ 95% CI")
+    axA.set_ylabel(r"per-neuron $I(s_n; Y)$, bits", fontsize=F_LABEL)
     axA.tick_params(axis="y", labelsize=F_TICK)
     axA.set_xticks(x)
     axA.set_xticklabels(short_labels, fontsize=F_TICK, rotation=0)

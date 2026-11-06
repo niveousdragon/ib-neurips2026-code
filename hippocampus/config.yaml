@@ -11,11 +11,13 @@ data:
   session_file: "NOF_{mouse}_{day}D syn data.npz"
   matching_file: "NOF_{mouse}.csv"
 
+# Sessions were recorded at 20 or 30 Hz; one nominal rate is used for every session.
+# It sets the time unit of speed and angular velocity.
 sampling_rate_hz: 20.0
 days: [1, 2, 3, 4]
 
 # Frames: every valid frame (finite egocentric state and position), then every
-# downsample-th of them (20 Hz -> 4 Hz), so adjacent samples are not tied by the
+# downsample-th of them (20 or 30 Hz -> 4 or 6 Hz), so adjacent samples are not tied by the
 # calcium decay; first train_frac of the session trains, the rest is the test fold.
 downsample: 5
 train_frac: 0.7
